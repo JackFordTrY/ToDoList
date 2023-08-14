@@ -1,0 +1,20 @@
+<div class="taks">
+    <div class="taks__information">
+        <div class="taks__information__title" [title]="taskData.title">
+            {{ taskData.title | uppercase }}
+        </div>
+        <div *ngIf="!taskData.isComplete; else taskComplete" class="taks__information__date">Created on:
+            {{taskData.createdOn | date:'hh:mm MMM dd, y'}}
+        </div>
+    </div>
+    <div class="task__navigation">
+        <fa-icon *ngIf="!taskData.isComplete" [icon]="['fas', 'check']" title="Complete" (click)="complete()"></fa-icon>
+        <fa-icon [icon]="['fas', 'xmark']" title="Delete" (click)="delete()"></fa-icon>
+    </div>
+</div>
+
+<ng-template #taskComplete>
+    <div class="taks__information__date">Finished on:
+        {{taskData.finishedOn | date:'hh:mm MMM dd, y'}}
+    </div>
+</ng-template>

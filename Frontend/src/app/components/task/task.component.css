@@ -1,0 +1,66 @@
+:host {
+  color: aliceblue;
+}
+
+.taks {
+  display: flex;
+  margin: 0px 10px;
+  padding: 5px;
+  height: fit-content;
+  background-color: var(--color-surface-mixed-200);
+  border: 2px solid var(--color-primary-500);
+  border-radius: 15px;
+  transition: all 0.4s;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.taks::before {
+  content: "";
+  left: 0;
+  top: 0;
+  border-radius: 15px;
+  position: absolute;
+  background: white;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0;
+  transition: all 0.2s ease-in-out;
+}
+
+.taks:hover::before {
+  opacity: 0.1;
+}
+
+.taks__information {
+  display: flex;
+  flex-direction: column;
+  font-family: monospace;
+}
+
+.taks__information__title {
+  padding: 0 5px;
+  font-size: 1rem;
+  font-style: oblique;
+  font-weight: bold;
+  max-width: 600px;
+  max-height: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.taks__information__date {
+  margin: 2px 0 2px;
+  padding: 0px 5px;
+  color: var(--color-surface-mixed-600);
+  font-size: 0.85rem;
+}
+
+.task__navigation {
+  margin: 0 5px 0 auto;
+  display: flex;
+  gap: 10px;
+}

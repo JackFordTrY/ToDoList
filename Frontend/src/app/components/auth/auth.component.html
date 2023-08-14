@@ -1,0 +1,46 @@
+<div class="form-container">
+    <form class="form-container__form" [formGroup]="authForm" autocomplete="off">
+        <div class="form-title" *ngIf="isLogin; else registerTitle">Log In into existing account</div>
+        <div class="form-block">
+            <label for="username">Enter username</label>
+            <input name="username" type="text" placeholder="Username" formControlName="username" required />
+            <div *ngIf="username?.invalid && (username?.dirty || username?.touched)">
+                <div *ngIf="username?.errors?.['required']">
+                    Username is required.
+                </div>
+                <div *ngIf="username?.errors?.['minlength']">
+                    Username must be at least 5 characters long.
+                </div>
+                <div *ngIf="username?.errors?.['pattern']">
+                    Username can only contain latin letters or digits.
+                </div>
+            </div>
+        </div>
+        <div class="form-block">
+            <label for="password">Enter password</label>
+            <input name="password" type="password" placeholder="Password" formControlName="password" />
+            <div *ngIf="password?.invalid && (password?.dirty || password?.touched)">
+                <div *ngIf="password?.errors?.['required']">
+                    Username is required.
+                </div>
+                <div *ngIf="password?.errors?.['minlength']">
+                    Username must be at least 8 characters long.
+                </div>
+                <div *ngIf="password?.errors?.['pattern']">
+                    Username can only contain latin letters or digits.
+                </div>
+            </div>
+        </div>
+        <div class="form-navigation">
+            <button [disabled]="authForm.invalid" (click)="submit()">Submit</button>
+            <a *ngIf="isLogin; else logIn" (click)="isLogin = !isLogin">Register</a>
+        </div>
+    </form>
+</div>
+
+<ng-template #registerTitle>
+    <div class="form-title">Create new account</div>
+</ng-template>
+<ng-template #logIn>
+    <a (click)="isLogin = !isLogin">Log in</a>
+</ng-template>

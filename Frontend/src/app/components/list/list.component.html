@@ -1,0 +1,14 @@
+<div class="content-container">
+    <div class="logout-button" (click)="logout()">
+        LOG OUT
+        <fa-icon [icon]="['fas','arrow-right-from-bracket']"></fa-icon>
+    </div>
+    <div class="content-container__task">
+        <app-task *ngFor="let task of tasks" [taskData]="task" (deleteEvent)="deleteTask($event)"></app-task>
+    </div>
+    <div class="content-container__navigation">
+        <input type="text" class="title-input" placeholder="Enter new task. (5 to 100 letters)"
+            [formControl]="titleInput" />
+        <button (click)="addTask()" [disabled]="titleInput.invalid">Add</button>
+    </div>
+</div>
