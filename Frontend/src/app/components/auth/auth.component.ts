@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, concatMap, interval, take } from 'rxjs';
+import { Observable, concatMap, firstValueFrom, interval, take } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -38,10 +38,9 @@ export class AuthComponent {
 
   submit() {
     if (this.isLogin) {
-      this.authService
-        .login(this.username?.value, this.password?.value)
-        .pipe(concatMap(() => interval(300).pipe(take(1))))
-        .subscribe(() => this.router.navigate(['/list']));
+      firstValueFrom(
+        this.authService.login(this.username?.value, this.password?.value)
+      ).then(() => this.router.navigate(['/list']));
     } else {
       this.authService
         .register(this.username?.value, this.password?.value)
