@@ -18,6 +18,10 @@ export class TaskComponent {
     this.taskService
       .complete(this.taskData.id, true)
       .subscribe(() => (this.taskData.isComplete = true));
+
+    this.taskData.isComplete = true;
+
+    this.taskData.finishedOn = new Date(Date.now());
   }
 
   delete() {

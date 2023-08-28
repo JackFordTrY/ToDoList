@@ -30,11 +30,11 @@ public class TaskService : ITaskService
                 CreatedOn = DateTime.UtcNow,
             }, cancellationToken);
         }
-        catch (DbUpdateException exception) when (((SqlException)exception.InnerException!).Number == 547) 
+        catch (DbUpdateException exception) when (((SqlException)exception.InnerException!).Number == 547)
         {
             throw new UserDoesntExistException();
         }
-        
+
     }
 
     public async Task DeleteAsync(int id, CancellationToken cancellationToken = default)
@@ -59,12 +59,13 @@ public class TaskService : ITaskService
             u.CreatedOn,
             u.FinishedOn))
             .OrderBy(u => u.IsComplete)
+            .ThenBy(u => u.CreatedOn)
             .ToList();
     }
 
     public async Task UpdateAsync(int id, UserTaskUpdateRequest request, CancellationToken cancellationToken = default)
     {
-        if(!await _repository.TaskExists(id, cancellationToken))
+        if (!await _repository.TaskExists(id, cancellationToken))
         {
             throw new TaskDoesntExistException();
         }
